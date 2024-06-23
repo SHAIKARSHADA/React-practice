@@ -1,37 +1,22 @@
-import { useState, useEffect } from 'react'
-import { axios } from "axios";
+import { useState } from "react"
+
 function App() {
-  const [todos, setTodos] = useState([])
+  const [count, setCount] = useState(0);
+  const [sum,setSum] = useState(0);
 
-  useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/todos")
-    .then((res) => {
-      console.log(res);
-      setTodos(res.data.todos)
-    })
-  }, [])
-  
+  let sumton = 0
+    for(let i = 0; i<=sum; i++) {
+      sumton += i;
+  }
 
-  //using the axios and getting the data and then rendering it in the React todo with using
-  // useEffect is used for doing side effects like fetching an data and other stuff which is not re rendering 
-   
 
-  return (
-    <>  
-    {todos.map(todo => <Todo key={todo.id} title={todo.title} description={todo.description}></Todo>)}
-    </>
-  )
-}
-
-function Todo({title,description}) {
-  return (
-    <>
+  return <>
     <div>
-      <h1>{title}</h1>
-      <h2>{description}</h2>
+      <input type="text" placeholder="n" onChange={(e) => setSum(e.target.value)}/>
+      <p>sum from {sum} to {sumton}</p>
+      <button onClick={() => setCount(count+1)}>Counter {count}</button>
     </div>
-    </>
-  )
+  </>
 }
 
 export default App
