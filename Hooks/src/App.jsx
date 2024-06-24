@@ -20,5 +20,16 @@ function App() {
 }
 
 
-useEffect
+useEffect(() => {
+  setTimeout(() => {
+    document.getElementById("incomeTaxDiv").innerHTML = "10"
+  },5000)
+})
+
+return(
+<>
+  <div>
+    hi there, your income tax returns are this <div id="incomeTaxDiv">{incomeTax}</div>
+  </div>
+</>)
 export default App
