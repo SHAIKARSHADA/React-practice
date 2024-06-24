@@ -1,22 +1,24 @@
-import { useState } from "react"
+import { useRef } from "react"
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [sum,setSum] = useState(0);
-
-  let sumton = 0
-    for(let i = 0; i<=sum; i++) {
-      sumton += i;
-  }
+  const divRef = useRef();
 
 
-  return <>
-    <div>
-      <input type="text" placeholder="n" onChange={(e) => setSum(e.target.value)}/>
-      <p>sum from {sum} to {sumton}</p>
-      <button onClick={() => setCount(count+1)}>Counter {count}</button>
-    </div>
-  </>
+  useEffect(() => {
+    setTimeout(() => {
+      divRef.current.innerHTML = "10"
+    },5000)
+  })
+
+   const incomeTax = 20000
+
+  return (<>
+  <div>
+    hi there, your income tax returns are this <div ref={divRef}>{incomeTax}</div>
+  </div>
+  </>)
 }
 
+
+useEffect
 export default App
