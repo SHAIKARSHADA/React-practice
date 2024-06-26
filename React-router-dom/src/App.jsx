@@ -1,23 +1,38 @@
+import { useState } from "react"
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Dashboard from React.lazy(() => './components/Dashboard' ) 
-import Landing from React.lazy(() => './components/Landing' )
-import { Topbar } from './components/Topbar'
+
+
 
 function App() {
 
-  return (
+  const [ count, setCount ] = useState(0);
+
+  return(
     <>
-     
-      <BrowserRouter>
-        <Topbar/>
-        <Routes> 
-        <Route path="/dashboard" element={<Dashboard/>}></Route>
-        <Route path="/" element={<Landing/>}></Route>
-        </Routes>
-      </BrowserRouter>
-    </> 
-  )
+    <Count/>
+    <Button count={count} setCount={setCount}/>
+    </>
+  ) 
+}
+
+
+function Count({count}) {  
+  return <>
+    {count}
+  </>
+
+
+}
+
+function Buttons({count, setCount}) {
+  return(<>
+  <button onClick={() => { setCount(count+1)}}>
+    Increase
+  </button>
+  <button onClick={() => { setCount(count-1)}}>
+    Decrease
+  </button>
+  </>)
 }
 
 export default App
