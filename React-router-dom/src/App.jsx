@@ -1,15 +1,16 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Dashboard } from './components/Dashboard'
-import { Landing } from './components/Landing'
+import Dashboard from React.lazy(() => './components/Dashboard' ) 
+import Landing from React.lazy(() => './components/Landing' )
 import { Topbar } from './components/Topbar'
 
 function App() {
 
   return (
     <>
-      <Topbar/>
+     
       <BrowserRouter>
+        <Topbar/>
         <Routes> 
         <Route path="/dashboard" element={<Dashboard/>}></Route>
         <Route path="/" element={<Landing/>}></Route>

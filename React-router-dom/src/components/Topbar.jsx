@@ -1,13 +1,18 @@
+import { useNavigate } from "react-router-dom";
+
 export function Topbar() {
+
+  const navigate = useNavigate();
+
   return <div style={{background: "black", color: "white"}}>
     Topbar
     <br/>
     <button onClick={() => {
-      window.location.href = "/dashboard";
+      navigate("/dashboard");
     }}>dashboard</button>
     <br/>
     <button onClick={() => {
-      window.location.href = "/";
+        navigate('/')
     }}>landing</button>
     <br/>
   </div>
