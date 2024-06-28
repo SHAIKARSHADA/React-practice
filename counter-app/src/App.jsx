@@ -4,12 +4,6 @@ function App() {
   const [todos, setTodos] = useState([{
     title: "go to gym",
     description: "go to gym at 8pm"
-  },{
-    title: "go to gym",
-    description: "go to gym at 7pm"
-  },{
-    title: "go to gym",
-    description: "go to gym at 9pm"
   }]);
 
   function addTodo() {

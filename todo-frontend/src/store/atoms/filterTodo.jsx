@@ -6,6 +6,7 @@ import { todoAtom } from './todo';
 
 export const filterTodoAtom = selector({
   key: "filterTodoAtom",
+  default: todoAtom,
   get: ({get}) => {
     const todos = get(todoAtom);
     const filter = get(filterAtom);
