@@ -1,94 +1,46 @@
-import React from 'react';
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-export default function App() {
 
-  const [ render, setRender ] = useState(true); 
+// using custom hooks for data fetching and auto refreshing 
+function useTodos(n) {
+  const [todos, setTodos] = useState([])
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    setTimeout(() => {
-      setRender(false);
-    },10000)
-  },[])
+   setInterval(() => {
+    axios.get("https://sum-server.100xdevs.com/todos")
+    .then(res => {
+      setTodos(res.data.todos);
+      setLoading(false);
+    })
+   }, n*1000)
 
-  return(
+   axios.get("https://sum-server.100xdevs.com/todos")
+   .then(res => {
+     setTodos(res.data.todos);
+     setLoading(false);
+   })
+  }, [])
+
+  return {todos,loading};
+}
+
+function App() {
+  const {todos,loading} = useTodos(6);  
+  return (
     <>
-  {render?  <MyComponent/> : <div></div> }
+      { loading? "loading....": todos.map(todo => <Track todo={todo} />)}
     </>
   )
 }
 
-
-class MyComponent extends React.Component {
-  componentDidMount() {
-    // Perform setup or data fetching here
-    console.log("component Mounted");
-  }
-
-  componentWillUnmount() {
-    // Clean up (e.g., remove event listeners or cancel subscriptions)
-    console.log("component unmounted");
-  }
-
-  render() {
-    // Render UI
-    <div>hi there</div>
-  }
+function Track({ todo }) {
+  return <div>
+    {todo.title}
+    <br />
+    {todo.description}
+  </div>
 }
 
-// mounting an unmounting example using the react hooks
-
-// function Component() {
-//   useEffect(() => {
-//   console.log("component mounted")
-  
-//   return () => {
-//      console.log("component unmounted");
-//   }
-//   },[])
-
-//   return<div>
-//   return div from inside my component
-// </div>
-// }
-
-
-
-
-
-// // class based components design used in 2018 ish 
-// class MyComponent extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { count: 0 };
-//   }
-
-//   incrementCount = () => {
-//     this.setState({ count: this.state.count + `1 });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <p>{this.state.count}</p>
-//         <button onClick={this.incrementCount}>Increment</button>
-//       </div>
-//     );
-//   }
-// }
-
-// functional based component design 
-
-// function MyComponent() {
-//   const [count, setCount] = useState(0);
-
-//   const incrementCount = () => {
-//     setCount(count + 1);
-//   };
-
-//   return (
-//     <div>
-//       <p>{count}</p>
-//       <button onClick={incrementCount}>Increment</button>
-//     </div>
-//   );
-// }
+export default App
