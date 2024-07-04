@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import {useEffect,useState} from 'react';
 
 export default function App() {
 
@@ -11,24 +12,44 @@ export default function App() {
 
   return(
     <>
-  {render?  <Component/> : <div></div> }
+  {render?  <MyComponent/> : <div></div> }
     </>
   )
 }
 
-function Component() {
-  useEffect(() => {
-  console.log("component mounted")
-  
-  return () => {
-     console.log("component unmounted");
-  }
-  },[render])
 
-  return<div>
-  return div from inside my component
-</div>
+class MyComponent extends React.Component {
+  componentDidMount() {
+    // Perform setup or data fetching here
+    console.log("component Mounted");
+  }
+
+  componentWillUnmount() {
+    // Clean up (e.g., remove event listeners or cancel subscriptions)
+    console.log("component unmounted");
+  }
+
+  render() {
+    // Render UI
+    <div>hi there</div>
+  }
 }
+
+// mounting an unmounting example using the react hooks
+
+// function Component() {
+//   useEffect(() => {
+//   console.log("component mounted")
+  
+//   return () => {
+//      console.log("component unmounted");
+//   }
+//   },[])
+
+//   return<div>
+//   return div from inside my component
+// </div>
+// }
 
 
 
